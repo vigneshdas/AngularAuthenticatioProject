@@ -8,7 +8,7 @@ import { AuthServiceService } from '../services/auth-service.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  validLogin: boolean; 
+  invalidLogin: boolean; 
 
   constructor(private router: Router , private authService : AuthServiceService , private route :ActivatedRoute ) { }
 
@@ -21,14 +21,14 @@ export class LoginComponent {
           this.invalidLogin = true; 
       });**/
     console.log("signIn Called")
-    this.validLogin = this.authService.login(credentials)
-    if (this.validLogin){
+    this.invalidLogin = this.authService.login(credentials)
+    if (this.invalidLogin){
       console.log("validLogin")
       let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl')
-      console.log("returnUrl="+returnUrl)
+      console.log("returnUrl=")
       this.router.navigate([returnUrl || '/home']);
     } else  
-        this.validLogin = false; 
+        this.invalidLogin = true; 
 
           
     this.authService.isLoggedIn();  
