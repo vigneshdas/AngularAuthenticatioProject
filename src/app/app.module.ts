@@ -8,6 +8,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { LoginComponent } from './login/login.component';
     HomeComponent,
     NotFoundComponent,
     ArchiveComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
+
   ],
   imports: [
     BrowserModule,
@@ -24,6 +27,7 @@ import { LoginComponent } from './login/login.component';
       { path :'' , component: LoginComponent},
       { path :'home' , component: HomeComponent},
       { path: 'login', component: LoginComponent },
+      { path: 'admin', component: AdminComponent },
       { path :'archive/:year/:month' , component: ArchiveComponent},
       { path :'**' , component: NotFoundComponent}
     ])
