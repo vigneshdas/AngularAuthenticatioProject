@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { AuthServiceService } from '../services/auth-service.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  invalidLogin: boolean; 
+  validLogin: boolean; 
 
-  constructor(private router: Router , private authService : AuthServiceService ) { }
+  constructor(private router: Router , private authService : AuthServiceService , private route :ActivatedRoute ) { }
 
   signIn(credentials) {
     /**this.authService.login(credentials)
@@ -20,11 +20,15 @@ export class LoginComponent {
         else  
           this.invalidLogin = true; 
       });**/
-      this.invalidLogin = this.authService.login(credentials)
-      if (this.invalidLogin)
-        this.router.navigate(['/home']);
-      else  
-          this.invalidLogin = true; 
+    console.log("signIn Called")
+    this.validLogin = this.authService.login(credentials)
+    if (this.validLogin){
+      console.log("validLogin")
+      let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl')
+      console.log("returnUrl="+returnUrl)
+      this.router.navigate([returnUrl || '/home']);
+    } else  
+        this.validLogin = false; 
 
           
     this.authService.isLoggedIn();  

@@ -9,6 +9,7 @@ import { ArchiveComponent } from './archive/archive.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -27,12 +28,14 @@ import { AdminComponent } from './admin/admin.component';
       { path :'' , component: LoginComponent},
       { path :'home' , component: HomeComponent},
       { path: 'login', component: LoginComponent },
-      { path: 'admin', component: AdminComponent },
+      { path: 'admin', component: AdminComponent , canActivate :[AuthGuard] },
       { path :'archive/:year/:month' , component: ArchiveComponent},
       { path :'**' , component: NotFoundComponent}
     ])
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
