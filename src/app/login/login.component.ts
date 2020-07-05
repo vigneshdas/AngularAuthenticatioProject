@@ -22,9 +22,11 @@ export class LoginComponent {
       });**/
       this.invalidLogin = this.authService.login(credentials)
       if (this.invalidLogin)
-      this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
       else  
           this.invalidLogin = true; 
-        
+
+          
+    this.authService.isLoggedIn();  
   }
 }
